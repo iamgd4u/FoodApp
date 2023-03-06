@@ -45,6 +45,12 @@
                     </li>
                 </div>
 
+                <div th:if="${isLoggedIn}">
+                    <li class="nav-item active">
+                        <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/viewOrders}" href="#">my orders</a>
+                    </li>
+                </div>
+
                 <li class="nav-item active">
                     <a class="nav-link" th:href="@{/cart}" href="#">cart</a>
                 </li>

@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.List;
 
 @Controller
 public class OrderController {
@@ -35,4 +38,13 @@ public class OrderController {
 
         return "orderPlaced";
     }
+
+    @GetMapping("/viewOrders")
+    public String viewOrders(Model model){
+        List<CustomerOrder> orders = orderRepository.findMyOrders(GlobalData.currentUser.getId());
+        model.addAttribute("orders",orders);
+        return "orders";
+
+    }
+
 }
