@@ -3,6 +3,7 @@
 To run this app on your machine:
 
 => CHANGE THE APPLICATIONS.PROPERTIES
+
 spring.datasource.url = jdbc:mysql://localhost:3306/schemaname
 spring.datasource.username = username
 spring.datasource.password = password
