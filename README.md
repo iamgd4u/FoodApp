@@ -16,7 +16,7 @@ spring.jpa.hibernate.ddl-auto=update
 =>Go to localhost://8080
 To access the index page
 
-=>Go to localhost://admin
+=>Go to localhost://8080/admin
 To access the admin page and add users and food items.
 
 
