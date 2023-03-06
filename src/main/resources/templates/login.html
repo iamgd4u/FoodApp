@@ -60,6 +60,9 @@
                 <div th:if="${param.error}" class="alert alert-error text-danger">
                     Invalid username or password.
                 </div>
+                <div th:if="${param.errorLogIn}" class="alert alert-error text-danger">
+                    You must be logged in first!!!
+                </div>
 
                 <input type="submit" value="Login" class="btn btn-primary btn-block">
                 <br>

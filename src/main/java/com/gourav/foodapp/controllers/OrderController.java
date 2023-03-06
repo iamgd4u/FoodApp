@@ -18,6 +18,8 @@ public class OrderController {
 
     @GetMapping("/placeOrder")
     public String placeOrder(Model model){
+        if(!GlobalData.isLoggedIn)
+            return "redirect:/login?errorLogIn";
         model.addAttribute("cart", GlobalData.cart);
         model.addAttribute("total",GlobalData.total());
         //add to order table

@@ -23,12 +23,14 @@ public class HomeController {
     public String menu(Model model){
         model.addAttribute("foods",foodRepository.findAll());
         model.addAttribute("isLoggedIn", GlobalData.isLoggedIn);
+        model.addAttribute("cartCount",GlobalData.cart.size());
         return "menu";
     }
     @GetMapping("/shop/viewproduct/{id}")
     public String viewProduct(@PathVariable int id, Model model){
         model.addAttribute("product",foodRepository.findById(id).get());
-
+        model.addAttribute("cartCount",GlobalData.cart.size());
+        model.addAttribute("isLoggedIn",GlobalData.isLoggedIn);
         return "viewProduct";
     }
 }
