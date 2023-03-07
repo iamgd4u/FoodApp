@@ -1,8 +1,10 @@
 package com.gourav.foodapp.controllers;
 
+import com.gourav.foodapp.dto.CustomOrder;
 import com.gourav.foodapp.globaldata.GlobalData;
 import com.gourav.foodapp.models.Food;
 import com.gourav.foodapp.models.CustomerOrder;
+import com.gourav.foodapp.repositories.FoodRepository;
 import com.gourav.foodapp.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,12 +12,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class OrderController {
     @Autowired
     OrderRepository orderRepository;
+    @Autowired
+    FoodRepository foodRepository;
 
     private int turn = 1;
 
@@ -42,7 +47,19 @@ public class OrderController {
 
     @GetMapping("/viewOrders")
     public String viewOrders(Model model){
-        List<CustomerOrder> orders = orderRepository.findMyOrders(GlobalData.currentUser.getId());
+        List<CustomerOrder> customerOrders = orderRepository.findMyOrders(GlobalData.currentUser.getId());
+        List<CustomOrder> orders = new ArrayList<>();
+
+        for(CustomerOrder customerOrder : customerOrders){
+            CustomOrder customOrder = new CustomOrder();
+            customOrder.setId(customerOrder.getId());
+            customOrder.setUserId(customerOrder.getUser_id());
+            customOrder.setFoodId(customerOrder.getFood_id());
+            Food food = foodRepository.findById(customerOrder.getFood_id()).get();
+            customOrder.setFoodName(food.getName());
+            orders.add(customOrder);
+        }
+
         model.addAttribute("isLoggedIn",GlobalData.isLoggedIn);
         model.addAttribute("orders",orders);
 

@@ -70,6 +70,7 @@
       <th scope="col">Order Id</th>
       <th scope="col">User Id</th>
       <th scope="col">Food Id</th>
+      <th scope="col">Food Item</th>
       <th scope="col">Delete</th>
     </tr>
     </thead>
@@ -78,9 +79,9 @@
     <tr th:each="order, iStat : ${orders}">
       <th scope="row" th:text="${iStat.index + 1}">1</th>
       <td th:text="${order.id}">dummy</td>
-      <td th:text="${order.user_id}">dummy</td>
-      <td th:text="${order.food_id}">dummy</td>
-
+      <td th:text="${order.userId}">dummy</td>
+      <td th:text="${order.foodId}">dummy</td>
+      <td th:text="${order.foodName}">dummy</td>
       <td><a href="" th:href="@{/order/delete/{id}(id=${order.id})}" class="btn btn-danger">Cancel Order</a></td>
 
     </tr>
