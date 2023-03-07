@@ -45,31 +45,21 @@
     <div class="col-sm-6">
         <h3 style="margin-top: 10px">Sign Up Now</h3>
         <p>Please fill out this to register</p>
-        <form th:action="@{/register}" th:object="${user}" method="post">
+        <form th:action="@{/register}" method="post" th:object="${user}">
+            <input type="hidden" name="id"  th:field="*{id}">
             <div class="form-group">
-                <label for="firstName">First Name</label>
-                <input type="text" name="firstName" id="firstName" required placeholder="Your Firstname" class="form-control form-control-lg">
-            </div>
-            <div class="form-group">
-                <label for="lastName">Last Name</label>
-                <input type="text" name="lastName" id="lastName" required placeholder="Your Lastname" class="form-control form-control-lg">
-            </div>
-            <div class="form-group">
-                <label for="email">Email address</label>
-                <input type="email" class="form-control form-control-lg" required minlength="6" placeholder="Email" name="email" id="email"
-                       aria-describedby="emailHelp">
-                <small id="emailHelp" class="form-text text-muted">We'll never share your email with
-                    anyone else.</small>
-            </div>
-            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" required th:field="*{username}" name="name" id="username"  placeholder="Enter name">
+                <label for="email">Email</label>
+                <input type="text" class="form-control" required th:field="*{email}" name="name" id="email"  placeholder="Enter email">
+                <label for="role">Role</label>
+                <input type="text" class="form-control" required th:field="*{role}" name="name" id="role"  placeholder="Enter role">
                 <label for="password">Password</label>
-                <input type="password" class="form-control form-control-lg" required placeholder="Password" name="password"
-                       id="password">
+                <input type="password" class="form-control" required th:field="*{password}" name="name" id="password"  placeholder="Enter password">
+
             </div>
 
-            <input type="submit" value="Register" class="btn btn-primary btn-block">
-            <span style="margin-top: 10px">Already have an account <a class="linkControl" href="./login.html"
-                                                                      th:href="@{/login}">Login here</a></span>
+            <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
 </div>
