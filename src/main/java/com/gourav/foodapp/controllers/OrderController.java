@@ -23,9 +23,11 @@ public class OrderController {
     FoodRepository foodRepository;
 
     private int turn = 1;
+    //private int id = 0;
 
     @GetMapping("/placeOrder")
     public String placeOrder(Model model){
+
         if(!GlobalData.isLoggedIn)
             return "redirect:/login?errorLogIn";
         else{
@@ -34,13 +36,16 @@ public class OrderController {
             model.addAttribute("total",GlobalData.total());
             //add to order table
             System.out.println(GlobalData.cart);
-            if(turn == 1){
+
                 for(Food f : GlobalData.cart){
+                    //int id = 0;
                     CustomerOrder o = new CustomerOrder(0,GlobalData.currentUser.getId(), f.getId());
-                    orderRepository.save(o);
+
+                        orderRepository.save(o).getId();
+
                 }
-                turn = 0;
-            }
+
+
             return "orderPlaced";
         }
     }
