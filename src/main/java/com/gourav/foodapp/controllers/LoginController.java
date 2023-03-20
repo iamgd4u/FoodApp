@@ -16,32 +16,14 @@ public class LoginController {
     @Autowired
     UserRepository userRepository;
 
-    @GetMapping("/login")
-    public String getLogin(Model model) {
-        model.addAttribute("isLoggedIn", GlobalData.isLoggedIn);
-        return "login";
+    @GetMapping("/mylogin")
+    public String login(){
+        return "mylogin";
     }
 
-    @PostMapping("/login")
-    public String login(@RequestParam("email") String email, @RequestParam("password") String password, Model model) {
-        User user = userRepository.findByEmail(email);
-
-        if (user == null) {
-            System.out.println("returning error");
-            return "redirect:login?error";
-        } else {
-            GlobalData.currentUser = user;
-            GlobalData.isLoggedIn = true;
-            model.addAttribute("isLoggedIn",GlobalData.isLoggedIn);
-            if (user.getRole().equals("admin")) {
-                return "redirect:/admin";
-            } else {
-                System.out.println("returning menu");
-                return "redirect:/menu";
-            }
-            //return "menu";
-        }
-
+    @PostMapping("/dologin")
+    public void doLogin(){
+        System.out.println("inside dologin");
     }
 }
 
