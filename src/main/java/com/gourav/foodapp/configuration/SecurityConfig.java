@@ -33,13 +33,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/","/mylogin","/logout","/register","/menu").permitAll()
+                .antMatchers("/","/mylogin","/logout","/register").permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/mylogin")
-                .loginProcessingUrl("/dologin").defaultSuccessUrl("/menu",true)
+                .loginProcessingUrl("/dologin").defaultSuccessUrl("/custom",true)
                 .and()
-                .oauth2Login().defaultSuccessUrl("/menu",true)
+                .oauth2Login().defaultSuccessUrl("/custom",true)
                 .and()
                 .logout()
                 .addLogoutHandler(new CustomLogoutHandler())
@@ -60,6 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         public void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
             System.out.println("logout done");
             GlobalData.cart.clear();
+            GlobalData.currentUser = null;
 
         }
     }

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport"
@@ -31,23 +31,21 @@
         <li class="nav-item active">
           <a class="nav-link" th:href="@{/menu}" href="#">menu</a>
         </li>
-        <div th:if="${!isLoggedIn}">
-          <li class="nav-item active">
-            <a class="nav-link" th:href="@{/login}" href="#">login</a>
-          </li>
-        </div>
 
-        <div th:if="${isLoggedIn}">
-          <li class="nav-item active">
-            <a class="nav-link" th:href="@{/logout}" href="#">logout</a>
-          </li>
-        </div>
+        <li class="nav-item active">
+          <a class="nav-link" sec:authorize="${false}" th:href="@{/mylogin}" href="#">login</a>
+        </li>
 
-        <div th:if="${isLoggedIn}">
-          <li class="nav-item active">
-            <a class="nav-link" th:href="@{/viewOrders}" href="#">my orders</a>
-          </li>
-        </div>
+
+        <li class="nav-item active">
+          <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}" href="#">logout</a>
+        </li>
+
+
+        <li class="nav-item active">
+          <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/viewOrders}" href="#">my
+            orders</a>
+        </li>
 
         <li class="nav-item active">
           <a class="nav-link" th:href="@{/cart}" href="#">cart</a>

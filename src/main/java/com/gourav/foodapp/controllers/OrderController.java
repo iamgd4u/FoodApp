@@ -7,6 +7,7 @@ import com.gourav.foodapp.models.CustomerOrder;
 import com.gourav.foodapp.repositories.FoodRepository;
 import com.gourav.foodapp.repositories.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,9 +27,9 @@ public class OrderController {
     //private int id = 0;
 
     @GetMapping("/placeOrder")
-    public String placeOrder(Model model){
+    public String placeOrder(Model model, Authentication auth){
 
-        if(!GlobalData.isLoggedIn)
+        if(!auth.isAuthenticated())
             return "redirect:/login?errorLogIn";
         else{
             model.addAttribute("isLoggedIn",GlobalData.isLoggedIn);
@@ -36,16 +37,12 @@ public class OrderController {
             model.addAttribute("total",GlobalData.total());
             //add to order table
             System.out.println(GlobalData.cart);
+            for (Food f : GlobalData.cart) {
+                //int id = 0;
+                CustomerOrder o = new CustomerOrder(0, GlobalData.currentUser.getId(), f.getId());
+                orderRepository.save(o);
 
-                for(Food f : GlobalData.cart){
-                    //int id = 0;
-                    CustomerOrder o = new CustomerOrder(0,GlobalData.currentUser.getId(), f.getId());
-
-                        orderRepository.save(o).getId();
-
-                }
-
-
+            }
             return "orderPlaced";
         }
     }
