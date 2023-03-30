@@ -13,6 +13,11 @@ spring.jpa.hibernate.ddl-auto=update
 
 =>Run Application.java
 
+=>(one time step)ADD A ADMIN/USER FOR SPRING SECURITY TO IDENTIFY U AS A LEGIT USER
+Go to your SQLworkbench or any dbmanagement app
+Go to foodapp table > user table
+Add a user with role as ROLE_ADMIN or ROLE_USER(case sensitive)
+
 =>Go to localhost://8080
 To access the index page
 
