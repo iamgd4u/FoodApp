@@ -26,6 +26,7 @@ public class HomeController {
         model.addAttribute("cartCount",GlobalData.cart.size());
         return "menu";
     }
+
     @GetMapping("/shop/viewproduct/{id}")
     public String viewProduct(@PathVariable int id, Model model){
         model.addAttribute("product",foodRepository.findById(id).get());

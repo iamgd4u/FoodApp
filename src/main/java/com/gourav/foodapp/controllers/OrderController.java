@@ -29,8 +29,8 @@ public class OrderController {
     @GetMapping("/placeOrder")
     public String placeOrder(Model model, Authentication auth){
 
-        if(!auth.isAuthenticated())
-            return "redirect:/login?errorLogIn";
+        if(auth == null || !auth.isAuthenticated())
+            return "redirect:/mylogin?errorLogIn";
         else{
             model.addAttribute("isLoggedIn",GlobalData.isLoggedIn);
             model.addAttribute("cart", GlobalData.cart);
